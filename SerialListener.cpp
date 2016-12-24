@@ -4,7 +4,6 @@
     SerialListener::SerialListener(int maxLen, char dlmtr) {
       this->maxInputLength = maxLen;
       this->delimiter = dlmtr;
-
       this->inputData = new char[this->maxInputLength];
     }
 
@@ -45,38 +44,22 @@
       return this->len;
     }
 
-    char* SerialListener::data() {
-//      Serial.println(F("SerialListener.data()"));
-//      Serial.print(F("this->maxInputLength="));
-//	Serial.println(this->maxInputLength);
-//
-//      Serial.print(F("this->len="));
-//      Serial.println(this->len);
+	char* SerialListener::data() {
+		
+		delete this->outputData;
+		
+		this->outputData = new char[this->len];
 
-      this->outputData = new char[this->len];
-      //this->outputData = this->inputData; // этот метод присвоения работает. Очищать inputData не нужно (длина актуальных данных в счётчике).
 
-      for (int i=0; i < this->len; i++) {
-        this->outputData[i] = this->inputData[i]; //хм, тоже работает. Всё дело было в print(ln)-ах?
-        //Serial.print(this->outputData[i]);
-      }
-      //Serial.println(F(""));
+		for (int i=0; i < this->len; i++) {
+			this->outputData[i] = this->inputData[i]; //хм, тоже работает. Всё дело было в print(ln)-ах?
+			//Serial.print(this->outputData[i]);
+		}
 
-// Три строчки ниже нарушают работу
-//      Serial.print(F("this->outputData="));
-//      Serial.println(this->outputData);
-////      Serial.println(*this->outputData);
+		this->clear();
 
-//      this->outputData = new char[this->len];
-//      
-//      for (int i=0; i < this->len; i++) {
-//        this->outputData[i] = this->inputData[i];
-//      }
-
-      this->clear();
-      
-      return this->outputData;
-    }
+		return this->outputData;
+	}
 
     // private
     void SerialListener::clear() {
