@@ -22,15 +22,13 @@
         if (piece == this->delimiter && (0 != this->len))
         {
           // завершаю приём
-          Serial.println(F("SerialListener::wait(), RECIEVE COMPLETE"));
-          
 	  //this->inputData[this->len++] = char(0);
-
           this->dataRecieved = true;
           
-	  Serial.print(F("inputData: -->@"));
-	  Serial.print(this->inputData);
-	  Serial.println(F("@<--"));
+	  //~ Serial.println(F("SerialListener::wait(), RECIEVE COMPLETE"));
+	  //~ Serial.print(F("inputData: -->@"));
+	  //~ Serial.print(this->inputData);
+	  //~ Serial.println(F("@<--"));
         }
         else 
         {
@@ -59,16 +57,16 @@
 
       this->outputData = new char[this->len];
 
-	Serial.print(F("this->outputData: -->@"));
+	//~ Serial.print(F("this->outputData: -->@"));
       
       for (int i=0; i < this->len; i++) {
 	
 	this->outputData[i] = this->inputData[i]; //хм, тоже работает. Всё дело было в print(ln)-ах?
 	
-	Serial.print(this->outputData[i]);
+	//~ Serial.print(this->outputData[i]);
       }
       
-	Serial.print(F("@<--"));
+	//~ Serial.println(F("@<--"));
 
       this->clear();
 
