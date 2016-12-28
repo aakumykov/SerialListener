@@ -9,7 +9,7 @@ class SerialListener
 	SerialListener(int maxLen, char dlmtr);
 	void wait();
 	boolean isRecieved();
-	int dataLength();
+	int length();
 	char* data();
     
     private:
