@@ -51,7 +51,7 @@
     }
 
     char* SerialListener::data() {
-      Serial.println(F("SerialListener::data()"));
+      //Serial.println(F("SerialListener::data()"));
 	    
       delete this->outputData;
 
