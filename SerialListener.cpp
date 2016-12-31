@@ -40,8 +40,8 @@
       }
     }
 
-    boolean SerialListener::isRecieved() {
-      ////Serial.println(F("SerialListener.isRecieved()"));
+    boolean SerialListener::recieved() {
+      ////Serial.println(F("SerialListener.recieved()"));
       return this->dataRecieved;
     }
 
@@ -50,7 +50,7 @@
       return this->len;
     }
 
-    char* SerialListener::data() {
+    char* SerialListener::data(bool with_null_character=true) {
       //Serial.println(F("SerialListener::data()"));
 	    
       delete this->outputData;
@@ -60,12 +60,13 @@
 	//~ Serial.print(F("this->outputData: -->@"));
       
       for (int i=0; i < this->len; i++) {
-	
-	this->outputData[i] = this->inputData[i]; //хм, тоже работает. Всё дело было в print(ln)-ах?
-	
-	//~ Serial.print(this->outputData[i]);
+		this->outputData[i] = this->inputData[i]; //хм, тоже работает. Всё дело было в print(ln)-ах?
       }
       
+      if (with_null_character) {
+		  this->outputData[this->len] = char(0);
+	  }
+	
 	//~ Serial.println(F("@<--"));
 
       this->clear();
@@ -73,10 +74,10 @@
       return this->outputData;
     }
 
-    // private
     void SerialListener::clear() {
       //Serial.println(F("SerialListener.clear()"));
       this->len = 0;
       this->dataRecieved = false;
     }
 
+    // private

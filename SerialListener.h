@@ -8,9 +8,10 @@ class SerialListener
     public:
 	SerialListener(int maxLen, char dlmtr);
 	void wait();
-	boolean isRecieved();
+	boolean recieved();
 	int length();
-	char* data();
+	char* data(bool with_null_character = true);
+	void clear();
     
     private:
 	    // настраиваемые пользователем
@@ -22,9 +23,6 @@ class SerialListener
 	    char* outputData;
 	    int len = 0;
 	    boolean dataRecieved = false;
-	    
-	    // методы
-	    void clear();
 };
 
 #endif
