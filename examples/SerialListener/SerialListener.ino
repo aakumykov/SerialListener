@@ -1,32 +1,24 @@
 #include <SerialListener.h>
 
-#include <MemoryFree.h>
-void showMem() {
-	Serial.print(F("freeMemory()="));
-	Serial.println(freeMemory());
-}
-
-
 SerialListener sListener(256, ';');
 
 void setup() {
 	Serial.begin(9600);
 	Serial.println("= SerialListener example =");
+	Serial.println("send some data with trailing ';' (semicolon).");
 }
 
 void loop() {
 	sListener.wait();
 
-	if (sListener.isRecieved())
+	if (sListener.recieved())
 	{
-		char* data = sListener.data();
 		int len = sListener.length();
+		char* data = sListener.data();
 		
-		data[len] = char(0);
-		
-		Serial.print(F("Recieved data: "));
+    Serial.print("Recieved data: ");
 		Serial.print(data);
-		
-		showMem();
+    Serial.print(", length: ");
+    Serial.println(len);
 	}
 }
