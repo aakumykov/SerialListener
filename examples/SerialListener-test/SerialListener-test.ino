@@ -25,14 +25,12 @@ void loop() {
   sl.wait();
 
   if (sl.recieved()) {
+    showMem("on recieve");
+    
     char* data = new char[sl.length()];
           data = sl.data();
-    
-    //delete data; // эта строка приводит к утечке!
-
-    //sl.data(); // утечка, если вызывать просто так (без присвоения какой-нибудь переменной)
-    
-    sl.clear();
+    showMem("on data");
+    delete data;
 
     showMem("on finish");
     Serial.println(F("----------------------------------"));
