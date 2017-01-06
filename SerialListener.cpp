@@ -52,8 +52,6 @@
 
     char* SerialListener::data(bool with_null_character=true) {
       //Serial.println(F("SerialListener::data()"));
-	    
-      delete this->outputData;
 
       this->outputData = new char[this->len];
 
